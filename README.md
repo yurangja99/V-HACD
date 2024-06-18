@@ -1,5 +1,9 @@
 # The V-HACD library decomposes a 3D surface into a set of "near" convex parts.
 
+## Forked by yurangja99
+- Added commands to run V-HACD for an `.obj` file in `README.md`
+- Specified parameters in `README.md`
+
 ![Approximate convex decomposition of "Camel"](doc/acd.png)
 
 # Why do we need approximate convex decomposition?
@@ -22,6 +26,25 @@ cd app
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ```
+
+```bash
+cd build
+./TestVHACD [INPUT_MESH] -h 64 -o obj
+```
+
+## Parameters
+- -h <n>                  : Maximum number of output convex hulls. Default is 32
+- -r <voxelresolution>    : Total number of voxels to use. Default is 100,000
+- -e <volumeErrorPercent> : Volume error allowed as a percentage. Default is 1%%. Valid range is 0.001 to 10
+- -d <maxRecursionDepth>  : Maximum recursion depth. Default value is 10.
+- -s <true/false>         : Whether or not to shrinkwrap output to source mesh. Default is true.
+- -f <fillMode>           : Fill mode. Default is 'flood', also 'surface' and 'raycast' are valid.
+- -v <maxHullVertCount>   : Maximum number of vertices in the output convex hull. Default value is 64
+- -a <true/false>         : Whether or not to run asynchronously. Default is 'true'
+- -l <minEdgeLength>      : Minimum size of a voxel edge. Default value is 2 voxels.
+- -p <true/false>         : If false, splits hulls in the middle. If true, tries to find optimal split plane location. False by default.
+- -o <obj/stl/usda>       : Export the convex hulls as a series of wavefront OBJ files, STL files, or a single USDA.
+- -g <true/false>         : If set to false, no logging will be displayed.
 
 # Documentation
 Click this link to find detailed documentation for how to use the library:
